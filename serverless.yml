@@ -4,6 +4,12 @@ frameworkVersion: "3"
 
 custom:
   tableName: "users-table-${self:provider.stage}"
+  dynamodb:
+    start:
+      inMemory: false
+      migrate: true
+    stages:
+      - dev
 
 provider:
   name: aws
@@ -41,7 +47,8 @@ functions:
 
 plugins:
   - serverless-rack
-
+  - serverless-dynamodb-local
+  - serverless-offline
 resources:
   Resources:
     UsersTable:

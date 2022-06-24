@@ -73,3 +73,13 @@ post '/users' do
 
   json user_id: user_id, name: name
 end
+
+delete '/users/:user_id' do
+  result = dynamodb_client.delete_item(
+    key: { 'userId': params[:user_id] },
+    table_name: ENV['USERS_TABLE'],
+    return_values: 'ALL_OLD'
+  )
+
+  status :ok
+end
