@@ -41,6 +41,13 @@ functions:
       - http:
           path: /users/
           method: post
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:008725977732:userpool/us-east-1_V0Gdlev32
+            scopes:
+              - users/admin
+              - users/read_write
+              - users/read
+
       - http:
           path: /users/{id}
           method: get
@@ -48,6 +55,13 @@ functions:
             parameters:
               paths:
                 id: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:008725977732:userpool/us-east-1_V0Gdlev32
+            scopes:
+              - users/admin
+              - users/read_write
+              - users/read
+
       - http:
           path: /users/{id}
           method: put
@@ -55,6 +69,12 @@ functions:
             parameters:
               paths:
                 id: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:008725977732:userpool/us-east-1_V0Gdlev32
+            scopes:
+              - users/admin
+              - users/read_write
+
       - http:
           path: /users/{id}
           method: delete
@@ -62,11 +82,17 @@ functions:
             parameters:
               paths:
                 id: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:008725977732:userpool/us-east-1_V0Gdlev32
+            scopes:
+              - users/admin
+              - users/read_write
 
 plugins:
   - serverless-rack
   - serverless-dynamodb-local
   - serverless-offline
+  - serverless-ruby-layer
 resources:
   Resources:
     UsersTable:
