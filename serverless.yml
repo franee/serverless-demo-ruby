@@ -10,6 +10,9 @@ custom:
       migrate: true
     stages:
       - dev
+  hooks:
+    package:initialize:
+      - bundle install --deployment
 
 provider:
   name: aws
@@ -93,6 +96,7 @@ plugins:
   - serverless-dynamodb-local
   - serverless-offline
   - serverless-ruby-layer
+  - serverless-hooks-plugin
 resources:
   Resources:
     UsersTable:

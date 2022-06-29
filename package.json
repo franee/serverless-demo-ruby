@@ -5,6 +5,7 @@
   "author": "",
   "devDependencies": {
     "serverless-dynamodb-local": "^0.2.40",
+    "serverless-hooks-plugin": "^1.1.0",
     "serverless-offline": "^8.8.0",
     "serverless-rack": "^1.0.6",
     "serverless-ruby-layer": "^1.6.0"
