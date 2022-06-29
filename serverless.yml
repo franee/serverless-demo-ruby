@@ -35,15 +35,12 @@ provider:
     USERS_TABLE: ${self:custom.tableName}
 
 functions:
-  create_user:
-    handler: users.create
+  api:
+    handler: rack_adapter.handler
     events:
       - http:
           path: /users/
           method: post
-  show_user:
-    handler: users.show
-    events:
       - http:
           path: /users/{id}
           method: get
@@ -51,9 +48,6 @@ functions:
             parameters:
               paths:
                 id: true
-  update_user:
-    handler: users.update
-    events:
       - http:
           path: /users/{id}
           method: put
@@ -61,9 +55,6 @@ functions:
             parameters:
               paths:
                 id: true
-  delete_user:
-    handler: users.delete
-    events:
       - http:
           path: /users/{id}
           method: delete
@@ -71,7 +62,6 @@ functions:
             parameters:
               paths:
                 id: true
-
 
 plugins:
   - serverless-rack
