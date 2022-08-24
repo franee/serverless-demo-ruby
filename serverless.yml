@@ -10,6 +10,8 @@ custom:
       migrate: true
     stages:
       - dev
+  authorizer:
+    arn: arn:aws:cognito-idp:us-east-1:008725977732:userpool/us-east-1_V0Gdlev32
 
 provider:
   name: aws
@@ -42,11 +44,10 @@ functions:
           path: /users/
           method: post
           authorizer:
-            arn: arn:aws:cognito-idp:us-east-1:008725977732:userpool/us-east-1_V0Gdlev32
+            arn: ${self:custom.authorizer.arn}
             scopes:
               - users/admin
               - users/read_write
-              - users/read
 
       - http:
           path: /users/{id}
@@ -56,7 +57,7 @@ functions:
               paths:
                 id: true
           authorizer:
-            arn: arn:aws:cognito-idp:us-east-1:008725977732:userpool/us-east-1_V0Gdlev32
+            arn: ${self:custom.authorizer.arn}
             scopes:
               - users/admin
               - users/read_write
@@ -70,7 +71,7 @@ functions:
               paths:
                 id: true
           authorizer:
-            arn: arn:aws:cognito-idp:us-east-1:008725977732:userpool/us-east-1_V0Gdlev32
+            arn: ${self:custom.authorizer.arn}
             scopes:
               - users/admin
               - users/read_write
@@ -83,7 +84,7 @@ functions:
               paths:
                 id: true
           authorizer:
-            arn: arn:aws:cognito-idp:us-east-1:008725977732:userpool/us-east-1_V0Gdlev32
+            arn: ${self:custom.authorizer.arn}
             scopes:
               - users/admin
               - users/read_write
