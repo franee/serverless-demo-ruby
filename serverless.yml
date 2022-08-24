@@ -19,6 +19,18 @@ provider:
   lambdaHashingVersion: "20201221"
   apiGateway:
     shouldStartNameWithService: true
+    resourcePolicy:
+      - Effect: Allow
+        Principal: '*'
+        Action: 'execute-api:Invoke'
+        Resource: 'execute-api:/*'
+      - Effect: Deny
+        Principal: '*'
+        Action: 'execute-api:Invoke'
+        Resource: 'execute-api:/*'
+        Condition:
+          StringNotEquals:
+            'aws:SourceVpce': vpce-0e4428896fcd70629
   stage: dev
   iam:
     role:
@@ -35,6 +47,14 @@ provider:
             - Fn::GetAtt: [UsersTable, Arn]
   environment:
     USERS_TABLE: ${self:custom.tableName}
+  endpointType: PRIVATE
+  vpcEndpointIds:
+    - vpce-0e4428896fcd70629
+  vpc:
+    subnetIds:
+      - subnet-05927e218647d620b
+    securityGroupIds:
+      - sg-0234ad28edc4f7b3f
 
 functions:
   api:
